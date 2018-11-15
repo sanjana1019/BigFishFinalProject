@@ -1,0 +1,37 @@
+********************************************************************************************
+DATA SOURCES
+********************************************************************************************
+
+
+Company acquisition data: 
+https://www.kaggle.com/shivamb/company-acquisitions-7-top-companies 
+
+Patent data: 
+http://www.patentsview.org/download/
+
+  - application.tsv
+	http://s3.amazonaws.com/data-patentsview-org/20180528/download/application.tsv.zip
+
+  - assignee.tsv
+ 	http://s3.amazonaws.com/data-patentsview-org/20180528/download/assignee.tsv.zip
+
+  - cpc_current.tsv
+  	http://s3.amazonaws.com/data-patentsview-org/20180528/download/cpc_current.tsv.zip
+
+  - cpc_group.tsv
+  	http://s3.amazonaws.com/data-patentsview-org/20180528/download/cpc_group.tsv.zip
+
+  - cpc_subgroup.tsv
+  	http://s3.amazonaws.com/data-patentsview-org/20180528/download/cpc_subgroup.tsv.zip
+
+  - cpc_subsection.tsv
+  	http://s3.amazonaws.com/data-patentsview-org/20180528/download/cpc_subsection.tsv.zip
+
+  - location.tsv
+  	http://s3.amazonaws.com/data-patentsview-org/20180528/download/location.tsv.zip
+
+  - location_assignee.tsv
+  	http://s3.amazonaws.com/data-patentsview-org/20180528/download/location_assignee.tsv.zip
+
+  - us_term_of_grant.tsv
+  	http://s3.amazonaws.com/data-patentsview-org/20180528/download/us_term_of_grant.tsv.zip
