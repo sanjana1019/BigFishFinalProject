@@ -2,7 +2,12 @@
 # Eclipse
 # Javascript
 # Python
+# local database
 # [if more is added to file, also include type here]
+
+### Local Database ######################################################################
+.db
+.sqlite3
 
 ### Eclipse #############################################################################
 # Created by https://www.gitignore.io/api/eclipse 
