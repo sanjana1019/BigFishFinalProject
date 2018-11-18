@@ -26,6 +26,9 @@ http://www.patentsview.org/download/
 
   - cpc_subsection.tsv
   	http://s3.amazonaws.com/data-patentsview-org/20180528/download/cpc_subsection.tsv.zip
+	
+  - patent.tsv
+  	http://s3.amazonaws.com/data-patentsview-org/20180528/download/patent.tsv.zip
 
   - location.tsv
   	http://s3.amazonaws.com/data-patentsview-org/20180528/download/location.tsv.zip
