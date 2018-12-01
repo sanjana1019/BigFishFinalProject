@@ -5,9 +5,9 @@ var path = require('path');
 // Connect string to MySQL
 var mysql = require('mysql');
 var connection = mysql.createConnection({
-  // host     : 'cis550dbinstance.cshxgaetjcqm.us-east-1.rds.amazonaws.com',
+  // host     : '',
   // user     : 'cis550',
-  // password : 'database550*',
+  // password : '',
   // database : 'patentdb'
    host : 'localhost',
    user : 'root',
