@@ -94,5 +94,46 @@ app.controller('showQuery6Controller', function ($scope,$http){
                 console.log('err');
             });
   };
+});
+
+//Query 7
+app.controller('showQuery7Controller', function ($scope,$http){
+  $scope.ShowResultsA = function(){
+    var dataList = [];
+    var request = $http.get('/getQuery7a');
+            request.success(function(data){
+            console.log('got response');
+            for (x =0;x<data.length;x++)
+            {
+                dataList.push(data[x]);
+            }
+            $scope.dataList = dataList;
+            $scope.colHeading = 'CPC Group Id';
+            $scope.colHeading2 = 'Class Description';
+            $scope.colHeading3 = '';
+        });
+        request.error(function(data){
+            console.log('err');
+        });
+  };
+
+  $scope.ShowResultsB = function(){
+        var dataList = [];
+        request = $http.get('/getQuery7b');
+                request.success(function(data){
+                console.log('got response');
+                for (x =0;x<data.length;x++)
+                {
+                    dataList.push(data[x]);
+                }
+                $scope.dataList = dataList;
+                $scope.colHeading = 'CPC Group Id';
+                $scope.colHeading2 = 'Class Description';
+                $scope.colHeading3 = 'Number of Renewals';
+            });
+            request.error(function(data){
+                console.log('err');
+            });
+  };
 
 });

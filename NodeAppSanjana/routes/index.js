@@ -45,6 +45,10 @@ router.get('/query6', function(req, res, next) {
   res.sendFile(path.join(__dirname,'../','views','query6.html'));
 });
 
+router.get('/query7', function(req, res, next) {
+  res.sendFile(path.join(__dirname,'../','views','query7.html'));
+});
+
 router.get('/data/:email?', function(req,res){
   // use console.log() as print() in case you want to debug, example below:
   // console.log("inside person email");
@@ -123,9 +127,44 @@ connection.query(query,function(err, rows, fields){
    res.json(rows);
    //console.log(rows);
  }
-
+});
 });
 
+//Query 7
+router.get('/getQuery7a', function(req, res){
+var query = 'SELECT DISTINCT G.id AS "id", G.title AS "description" ' +
+'FROM us_term_of_grant T ' +
+'JOIN cpc_current C ON T.patent_id = C.patent_id ' +
+'JOIN cpc_group G ON C.group_id = G.id ' +
+'WHERE T.disclaimer_date = \'0000-00-00\' ' +
+'ORDER BY G.title ' +
+'LIMIT 5;';
+console.log('hello');
+connection.query(query,function(err, rows, fields){
+ if(err) console.log(err);
+ else{
+   res.json(rows);
+   //console.log(rows);
+ }
+});
+});
+
+router.get('/getQuery7b', function(req, res){
+var query = 'SELECT DISTINCT G.id AS "id", G.title AS "description", count(*) AS "count" ' +
+'FROM us_term_of_grant T ' +
+'JOIN cpc_current C ON T.patent_id = C.patent_id ' +
+'JOIN cpc_group G ON C.group_id = G.id ' +
+'WHERE T.disclaimer_date = \'0000-00-00\' ' +
+'GROUP BY G.id ' +
+'ORDER BY count(*) DESC ' +
+'LIMIT 5;';
+connection.query(query,function(err, rows, fields){
+ if(err) console.log(err);
+ else{
+   res.json(rows);
+   //console.log(rows);
+ }
+});
 });
 
 

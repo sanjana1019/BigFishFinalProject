@@ -19,20 +19,22 @@
         </nav>
          <div class="container">
             <div class="jumbotron">
-         <div ng-controller="showQuery6Controller">
+         <div ng-controller="showQuery7Controller">
         <p>
-            <p> In which years did the most acquisitions happen?  </p>
+            <p> Which classes of patents do these companies consistently renew? </p>
             <button type="button" ng-click="ShowResultsA()" class="button">Show Results A</button>
-            <p> Which company made the most acquisitions within a span of time? </p>
+            <p> What are the top 5 classes of patents that had the most renewals? </p>
             <button type="button" ng-click="ShowResultsB()" class="button">Show Results B</button>
         </p>
-        <table border="05" cellpadding="10" cellspacing="1" width="500" align="center">
+        <table border="05" cellpadding="10" cellspacing="1" width="700" align="center">
           <tr>
-            <th> {{colHeading}} </th>
+            <th width="100"> {{colHeading}} </th>
             <th> {{colHeading2}} </th>
+            <th> {{colHeading3}} </th>
           </tr>
           <tr ng-repeat="x in dataList">
-            <td> {{x.value}} </td>
+            <td> {{x.id}} </td>
+            <td> {{x.description}} </td>
             <td> {{x.count}} </td>
           </tr>
         </table>
