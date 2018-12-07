@@ -11,8 +11,8 @@ app.controller('myController', function($scope, $http) {
         request.error(function(data){
             console.log('err');
         });
-    
-    }; 
+
+    };
 });
 
 // To implement "Insert a new record", you need to:
@@ -30,7 +30,7 @@ app.controller('insertController', function($scope,$http){
             console.log('err');
         });
 
-    };    
+    };
 });
 
 app.controller('friendsController', function($scope,$http){
@@ -50,7 +50,7 @@ app.controller('friendsController', function($scope,$http){
 
 });
 
-function onlyUnique(value, index, self) { 
+function onlyUnique(value, index, self) {
     return self.indexOf(value) === index;
 }
 
@@ -58,64 +58,41 @@ function onlyUnique(value, index, self) {
 // var a = ['a', 1, 'a', 2, '1'];
 // var unique = a.filter( onlyUnique );
 
-app.controller('showfamilyController', function ($scope,$http){
-    var familyList = [];
-    console.log('aaa');
-    // $scope.Parents = "Parent Company";
-    // $scope.Children = "Child Company";
-    var request = $http.get('/getFamily');
+app.controller('showQuery6Controller', function ($scope,$http){
+  $scope.ShowResultsA = function(){
+    var dataList = [];
+    var request = $http.get('/getQuery6a');
             request.success(function(data){
             console.log('got response');
-            var parentList = [];
-            //console.log(data);
             for (x =0;x<data.length;x++)
             {
-                familyList.push(data[x]);
-                parentList.push(data[x].ParentCompany)
+                dataList.push(data[x]);
             }
-            $scope.familymembers = familyList;
-            parentUniqueList = parentList.filter(onlyUnique);
-            $scope.parentUniqueList = parentUniqueList;
-
+            $scope.dataList = dataList;
+            $scope.colHeading = 'Year';
+            $scope.colHeading2 = 'Number of Acquisitions';
         });
         request.error(function(data){
             console.log('err');
         });
+  };
 
-    $scope.Change = function(parentItem){
-
-        childrenList = [];
-        console.log("entered");
-        //$scope.childrenList = familyList.get(parentItem.x);
-        //console.log(parentItem);
-        for(x=0;x<familyList.length;x++)
-        {
-        //console.log(familyList[x].ParentCompany);
-        if(familyList[x].ParentCompany === parentItem)
-        {
-        //console.log(familyList[x].ChildCompany);
-        childrenList.push(familyList[x].ChildCompany);
-        }
-        }    
-
-        $scope.childrenList = childrenList;
-        // console.log(familyList.get(parentItem.x));
-        // console.log($scope.childrenList);
-        //console.log($scope.childrenList);
-    };
-
-    $scope.ShowFamily = function(parentCompany,childCompany){
-        console.log(parentCompany);
-        console.log(childCompany);
-        var request = $http.get('/query2/parent/'+parentCompany+'/child/'+childCompany);
-        request.success(function(data){
-            console.log('got response');
-            $scope.data = data;
-        });
-        request.error(function(data){
-            console.log('err');
-        });
-
-    };
+  $scope.ShowResultsB = function(){
+        var dataList = [];
+        request = $http.get('/getQuery6b');
+                request.success(function(data){
+                console.log('got response');
+                for (x =0;x<data.length;x++)
+                {
+                    dataList.push(data[x]);
+                }
+                $scope.dataList = dataList;
+                $scope.colHeading = 'Company';
+                $scope.colHeading2 = 'Number of Acquisitions';
+            });
+            request.error(function(data){
+                console.log('err');
+            });
+  };
 
 });

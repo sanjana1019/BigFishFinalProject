@@ -19,26 +19,20 @@
         </nav>
          <div class="container">
             <div class="jumbotron">
-         <div ng-controller="showfamilyController">
+         <div ng-controller="showQuery6Controller">
         <p>
-            <select ng-model = "Parents" ng-options= "x for x in parentUniqueList" ng-change = "Change(Parents)">
-                <option selected disabled value="">---Parent Company---</option>
-            </select>
-            <select ng-model = "Children" ng-options = "x for x in childrenList"> 
-                <!-- ng-options= "x.ChildCompany for x in familymembers" -->
-                <option selected disabled value="">---Child Company---</option>
-            </select>
-            <button type="button" ng-click="ShowFamily(Parents,Children)" class="button">Click to Query</button>
+            <button type="button" ng-click="ShowResultsA()" class="button">Show Results</button>
+            <button type="button" ng-click="ShowResultsB()" class="button">Show Results</button>
         </p>
         <table border="05" cellpadding="10" cellspacing="1" width="500" align="center">
           <tr>
-            <td> ParentCompany </td>
-            <td> ChildCompany </td> 
-            <tr ng-repeat="x in data">
-            <td> {{x.ParentCompany}} </td>
-            <td> {{x.ChildCompany}} </td>
-            </tr>
-          </tr>  
+            <td> {{colHeading}} </td>
+            <td> {{colHeading2}} </td>
+          </tr>
+          <tr ng-repeat="x in dataList">
+            <td> {{x.value}} </td>
+            <td> {{x.count}} </td>
+          </tr>
         </table>
         </div>
         </div>

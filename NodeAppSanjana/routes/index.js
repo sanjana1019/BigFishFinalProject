@@ -12,8 +12,8 @@ var connection = mysql.createConnection({
    host : 'localhost',
    user : 'root',
    // Enter your password here
-   password : 'XXXXXX',
-   database : 'YYYYY' //Enter your local sql database name 
+   password : 'database1019',
+   database : 'patent' //Enter your local sql database name
 });
 
 var del = connection._protocol._delegateError;
@@ -41,8 +41,8 @@ router.get('/searchfriends', function(req, res, next) {
   res.sendFile(path.join(__dirname, '../', 'views', 'searchfriends.html'));
 });
 
-router.get('/query2', function(req, res, next) {
-  res.sendFile(path.join(__dirname,'../','views','query2.html'));
+router.get('/query6', function(req, res, next) {
+  res.sendFile(path.join(__dirname,'../','views','query6.html'));
 });
 
 router.get('/data/:email?', function(req,res){
@@ -52,8 +52,8 @@ router.get('/data/:email?', function(req,res){
   console.log('typeof:' + typeof(req.params.email));
   if(req.params.email != undefined && req.params.email != 'undefined' )
   {
-  var query = "SELECT * from subgroup_new where Login = '"+req.params.email+"';"; 
-  
+  var query = "SELECT * from subgroup_new where Login = '"+req.params.email+"';";
+
   }
   else
   {
@@ -65,7 +65,7 @@ router.get('/data/:email?', function(req,res){
     if (err) console.log(err);
     else {
         res.json(rows);
-    }  
+    }
     });
 });
 
@@ -77,7 +77,7 @@ router.get('/login/:login/name/:name/sex/:sex/RelationshipStatus/:RelationshipSt
     if (err) console.log(err);
     else {
         res.json(rows);
-    }  
+    }
     });
 
 });
@@ -89,8 +89,42 @@ router.get('/personlogin/:login', function(req,res){
     if (err) console.log(err);
     else {
         res.json(rows);
-    }  
+    }
     });
+
+});
+
+router.get('/getQuery6a', function(req, res){
+var query = 'SELECT year AS "value", count(*) AS "count" ' +
+'FROM acquisitions ' +
+'GROUP BY year ' +
+'ORDER BY count(*) DESC ' +
+'LIMIT 5;';
+console.log('hello');
+connection.query(query,function(err, rows, fields){
+ if(err) console.log(err);
+ else{
+   res.json(rows);
+   //console.log(rows);
+ }
+});
+});
+
+router.get('/getQuery6b', function(req, res){
+var query = 'SELECT ParentCompany AS "value", count(*) AS "count" ' +
+'FROM acquisitions ' +
+'WHERE year >= 1988 AND year <= 2018 ' +
+'GROUP BY ParentCompany ' +
+'ORDER BY count(*) DESC ' +
+'LIMIT 7;';
+connection.query(query,function(err, rows, fields){
+ if(err) console.log(err);
+ else{
+   res.json(rows);
+   //console.log(rows);
+ }
+
+});
 
 });
 
@@ -103,9 +137,7 @@ router.get('/personlogin/:login', function(req,res){
     res.json(rows);
     //console.log(rows);
   }
-
  });
-
  });
 
 
@@ -115,7 +147,7 @@ router.get('/personlogin/:login', function(req,res){
   console.log(query);
   connection.query(query,function(err, rows, fields){
   if(err)
-  { 
+  {
     console.log(err);
     console.log('jflsdk');
   }
@@ -123,7 +155,7 @@ router.get('/personlogin/:login', function(req,res){
     res.json(rows);
   }
 
- });  
+ });
 
 
  });
