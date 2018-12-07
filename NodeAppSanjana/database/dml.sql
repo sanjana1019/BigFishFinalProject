@@ -105,6 +105,11 @@ GROUP BY G.id
 ORDER BY count(*) DESC
 LIMIT 5;
 
+
+CREATE INDEX `idx_us_term_of_grant_disclaimer_date` ON  us_term_of_grant(`disclaimer_date`);
+
+DROP INDEX  idx_us_term_of_grant_disclaimer_date ON us_term_of_grant;
+
 SELECT * FROM acquisitions;
 
 SELECT count(*) FROM assignee;
