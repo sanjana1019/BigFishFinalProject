@@ -59,6 +59,14 @@ function onlyUnique(value, index, self) {
 // var unique = a.filter( onlyUnique );
 
 app.controller('showQuery6Controller', function ($scope,$http){
+  var companies = {};
+  $http.get('/getQuery6b')
+    .success(function(data){
+      $scope.companies = data;
+    })
+    .error(function(data){
+      console.log('error retrieving companies');
+    });
   $scope.ShowResultsA = function(){
     var dataList = [];
     var request = $http.get('/getQuery6a');
@@ -77,9 +85,14 @@ app.controller('showQuery6Controller', function ($scope,$http){
         });
   };
 
-  $scope.ShowResultsB = function(){
+  $scope.ShowResultsB = function(company){
         var dataList = [];
-        request = $http.get('/getQuery6b');
+        console.log(company);
+        var url= '/getQuery6b';
+        if(company !== undefined && company !== null){
+          url = url+'?company=' + company;
+        }
+        request = $http.get(url);
                 request.success(function(data){
                 console.log('got response');
                 for (x =0;x<data.length;x++)

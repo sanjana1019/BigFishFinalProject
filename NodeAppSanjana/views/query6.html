@@ -23,8 +23,10 @@
         <p>
             <p> In which years did the most acquisitions happen?  </p>
             <button type="button" ng-click="ShowResultsA()" class="button">Show Results A</button>
-            <p> Which company made the most acquisitions within a span of time? </p>
-            <button type="button" ng-click="ShowResultsB()" class="button">Show Results B</button>
+            <p> How many acquisitions did each company make within the last 20 years? </p>
+            <select ng-model="companies.value" ng-options="company.value as company.value for company in companies">
+            <option value=""> All companies </option> </select>
+            <button type="button" ng-click="ShowResultsB(companies.value)" class="button">Show Results B</button>
         </p>
         <table border="05" cellpadding="10" cellspacing="1" width="500" align="center">
           <tr>

@@ -115,12 +115,26 @@ connection.query(query,function(err, rows, fields){
 });
 
 router.get('/getQuery6b', function(req, res){
-var query = 'SELECT ParentCompany AS "value", count(*) AS "count" ' +
-'FROM acquisitions ' +
-'WHERE year >= 1988 AND year <= 2018 ' +
-'GROUP BY ParentCompany ' +
-'ORDER BY count(*) DESC ' +
-'LIMIT 7;';
+  var company = req.query['company'];
+  var query = '';
+  console.log(company);
+  if (company === undefined || company === null ){
+    query = 'SELECT ParentCompany AS "value", count(*) AS "count" ' +
+    'FROM acquisitions ' +
+    'WHERE year >= 1988 AND year <= 2018 ' +
+    'GROUP BY ParentCompany ' +
+    'ORDER BY count(*) DESC ' +
+    'LIMIT 7;';
+  }else {
+    query = 'SELECT ParentCompany AS "value", count(*) AS "count" ' +
+    'FROM acquisitions ' +
+    'WHERE year >= 1988 AND year <= 2018 AND ParentCompany = \'' +
+    company +
+    '\' GROUP BY ParentCompany ' +
+    'ORDER BY count(*) DESC ' +
+    'LIMIT 7;';
+  }
+
 connection.query(query,function(err, rows, fields){
  if(err) console.log(err);
  else{
