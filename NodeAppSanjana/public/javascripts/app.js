@@ -111,6 +111,7 @@ app.controller('showQuery6Controller', function ($scope,$http){
 
 //Query 7
 app.controller('showQuery7Controller', function ($scope,$http){
+  $scope.orderby= "5";
   $scope.ShowResultsA = function(){
     var dataList = [];
     var request = $http.get('/getQuery7a');
@@ -130,9 +131,9 @@ app.controller('showQuery7Controller', function ($scope,$http){
         });
   };
 
-  $scope.ShowResultsB = function(){
+  $scope.ShowResultsB = function(orderby){
         var dataList = [];
-        request = $http.get('/getQuery7b');
+        request = $http.get('/getQuery7b?orderby=' +orderby);
                 request.success(function(data){
                 console.log('got response');
                 for (x =0;x<data.length;x++)

@@ -23,8 +23,15 @@
         <p>
             <p> Which classes of patents do these companies consistently renew? </p>
             <button type="button" ng-click="ShowResultsA()" class="button">Show Results A</button>
-            <p> What are the top 5 classes of patents that had the most renewals? </p>
-            <button type="button" ng-click="ShowResultsB()" class="button">Show Results B</button>
+            <p> What are the top
+              <select ng-model="orderby" name="orderby">
+              <option value="5" selected="selected">5</option>
+              <option value="10">10</option>
+              <option value="15">15</option>
+            </select>
+              classes of patents that had the most renewals? </p>
+
+            <button type="button" ng-click="ShowResultsB(orderby)" class="button">Show Results B</button>
         </p>
         <table border="05" cellpadding="10" cellspacing="1" width="700" align="center">
           <tr>

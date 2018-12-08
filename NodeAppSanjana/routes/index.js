@@ -164,6 +164,7 @@ connection.query(query,function(err, rows, fields){
 });
 
 router.get('/getQuery7b', function(req, res){
+  var orderby= req.query['orderby'];
 var query = 'SELECT DISTINCT G.id AS "id", G.title AS "description", count(*) AS "count" ' +
 'FROM us_term_of_grant T ' +
 'JOIN cpc_current C ON T.patent_id = C.patent_id ' +
@@ -171,7 +172,8 @@ var query = 'SELECT DISTINCT G.id AS "id", G.title AS "description", count(*) AS
 'WHERE T.disclaimer_date = \'0000-00-00\' ' +
 'GROUP BY G.id ' +
 'ORDER BY count(*) DESC ' +
-'LIMIT 5;';
+'LIMIT ' +
+orderby + ';';
 connection.query(query,function(err, rows, fields){
  if(err) console.log(err);
  else{
