@@ -12,8 +12,8 @@ var connection = mysql.createConnection({
    host : 'localhost',
    user : 'root',
    // Enter your password here
-   password : 'XXXXXX',
-   database : 'YYYYY' //Enter your local sql database name 
+   password : '',
+   database : '' //Enter your local sql database name 
 });
 
 var del = connection._protocol._delegateError;
@@ -43,6 +43,14 @@ router.get('/searchfriends', function(req, res, next) {
 
 router.get('/query2', function(req, res, next) {
   res.sendFile(path.join(__dirname,'../','views','query2.html'));
+});
+
+router.get('/query1_bs', function(req, res, next) {
+  res.sendFile(path.join(__dirname,'../','views','query1_bs.html'));
+});
+
+router.get('/query2_bs', function(req, res, next) {
+  res.sendFile(path.join(__dirname,'../','views','query2_bs.html'));
 });
 
 router.get('/data/:email?', function(req,res){
@@ -109,15 +117,21 @@ router.get('/personlogin/:login', function(req,res){
  });
 
 
- router.get('/query2/parent/:parentcompany/child/:childcompany', function(req, res){
-  console.log('abcabc');
-  var query = 'select * from acquisitions where ParentCompany = \''+req.params.parentcompany+'\'and ChildCompany = \''+req.params.childcompany+'\';';
+ router.get('/query1_bs/parent/:parentcompany/child/:childcompany', function(req, res){
+  console.log("inside query1_bs");
+  // var query = 'SELECT * from patent WHERE patent_id="' + req.params.parentcompany + '"';
+  var query = 'WITH temp AS (select patent_id,organization from bassignee where organization = "' + req.params.parentcompany + '") select temp.organization, patent.patent_id, patent.title, patent.date, patent.num_claims from temp JOIN patent ON temp.patent_id = patent.patent_id WHERE year>=2000 ORDER BY date DESC';
+  if(!(req.params.childcompany === undefined || req.params.childcompany === 'undefined' || req.params.childcompany === ''))
+  {
+    query = 'WITH temp AS (select patent_id,organization from bassignee where organization = "' + req.params.childcompany + '") select temp.organization, patent.patent_id, patent.title, patent.date, patent.num_claims from temp JOIN patent ON temp.patent_id = patent.patent_id WHERE year>=2000 ORDER BY date DESC';  
+  }
+  // note that email parameter in the request can be accessed using "req.params.email"
   console.log(query);
   connection.query(query,function(err, rows, fields){
   if(err)
   { 
     console.log(err);
-    console.log('jflsdk');
+    console.log('error occurred!!');
   }
   else{
     res.json(rows);
@@ -127,6 +141,45 @@ router.get('/personlogin/:login', function(req,res){
 
 
  });
+
+  router.get('/query2_bs/parent/:parentcompany/child/:childcompany', function(req, res){
+  console.log("inside query2_bs");
+  var query = 'with temp as (select patent_id from bassignee where organization = "' + req.params.parentcompany + '") select patent.patent_id, patent.title, patent.year from temp join patent where temp.patent_id = patent.patent_id and patent.title like "%'+ req.params.childcompany + '%" ORDER BY year DESC';
+
+  console.log(query);
+
+  connection.query(query,function(err, rows, fields){
+  if(err)
+  { 
+    console.log(err);
+    console.log('error occurred!!');
+  }
+  else{
+    res.json(rows);
+  }
+
+ });  
+
+
+ });
+
+//Show friends
+router.get('/query2BS', function(req, res, next) {
+  res.sendFile(path.join(__dirname, '../', 'views', 'query2BS.html'));
+});
+
+ router.get('/friends/:login', function(req,res) {
+  console.log("inside show friends");
+  var query = 'with temp as (select patent_id from bassignee where organization = "Google") select patent.patent_id, patent.title, patent.year from temp join patent where temp.patent_id = patent.patent_id and patent.title like "%'+ req.params.login + '%"';
+  
+  console.log(query);
+  connection.query(query, function(err, rows, fields) {
+    if (err) console.log(err);
+    else {
+        res.json(rows);
+    }  
+    });
+});
 
 // ----Your implemention of route handler for "Insert a new record" should go here-----
 
