@@ -12,8 +12,8 @@ var connection = mysql.createConnection({
    host : 'localhost',
    user : 'root',
    // Enter your password here
-   password : '',
-   database : '' //Enter your local sql database name 
+   password : 'bhavna12',
+   database : 'patentdb' //Enter your local sql database name 
 });
 
 var del = connection._protocol._delegateError;
@@ -144,8 +144,32 @@ router.get('/personlogin/:login', function(req,res){
 
   router.get('/query2_bs/parent/:parentcompany/child/:childcompany', function(req, res){
   console.log("inside query2_bs");
-  var query = 'with temp as (select patent_id from bassignee where organization = "' + req.params.parentcompany + '") select patent.patent_id, patent.title, patent.year from temp join patent where temp.patent_id = patent.patent_id and patent.title like "%'+ req.params.childcompany + '%" ORDER BY year DESC';
+  var query = 'with temp as (select patent_id from bassignee where organization = "' + req.params.parentcompany + '") select patent.patent_id, patent.title, patent.date from temp join patent where temp.patent_id = patent.patent_id and patent.title like "%'+ req.params.childcompany + '%" ORDER BY date DESC';
 
+
+  //select p.patent_id,p.title,a.organization from patent p join assignee a on p.patent_id = a.patent_id where title like '%Robotic%';
+  console.log(query);
+
+  connection.query(query,function(err, rows, fields){
+  if(err)
+  { 
+    console.log(err);
+    console.log('error occurred!!');
+  }
+  else{
+    res.json(rows);
+  }
+
+ });  
+
+
+ });
+
+  router.get('/query4_bs/child/:childcompany', function(req, res){
+  console.log("inside query4_bs");
+  //var query = 'with temp as (select patent_id from bassignee where organization = "' + req.params.parentcompany + '") select patent.patent_id, patent.title, patent.date from temp join patent where temp.patent_id = patent.patent_id and patent.title like "%'+ req.params.childcompany + '%" ORDER BY date DESC';
+
+  var query = 'select a.organization,p.patent_id,p.title,p.date from patent p join assignee a on p.patent_id = a.patent_id where p.title like "%'+ req.params.childcompany + '%" ORDER BY date DESC';
   console.log(query);
 
   connection.query(query,function(err, rows, fields){
