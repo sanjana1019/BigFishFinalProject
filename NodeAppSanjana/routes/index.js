@@ -13,7 +13,7 @@ var connection = mysql.createConnection({
    user : 'root',
    // Enter your password here
    password : 'database1019',
-   database : 'patent' //Enter your local sql database name
+   database : 'new_patent' //Enter your local sql database name
 });
 
 var del = connection._protocol._delegateError;
@@ -99,19 +99,19 @@ router.get('/personlogin/:login', function(req,res){
 });
 
 router.get('/getQuery6a', function(req, res){
-var query = 'SELECT year AS "value", count(*) AS "count" ' +
-'FROM acquisitions ' +
-'GROUP BY year ' +
-'ORDER BY count(*) DESC ' +
-'LIMIT 5;';
-console.log('hello');
-connection.query(query,function(err, rows, fields){
- if(err) console.log(err);
- else{
+  var query = 'SELECT AcquisitionYear AS "value", count(*) AS "count" ' +
+  'FROM acquisitions ' +
+  'GROUP BY AcquisitionYear ' +
+  'ORDER BY count(*) DESC ' +
+  'LIMIT 5;';
+  console.log('hello');
+  connection.query(query,function(err, rows, fields){
+    if(err) console.log(err);
+      else{
    res.json(rows);
    //console.log(rows);
- }
-});
+      }
+    });
 });
 
 router.get('/getQuery6b', function(req, res){
@@ -121,14 +121,14 @@ router.get('/getQuery6b', function(req, res){
   if (company === undefined || company === null ){
     query = 'SELECT ParentCompany AS "value", count(*) AS "count" ' +
     'FROM acquisitions ' +
-    'WHERE year >= 1988 AND year <= 2018 ' +
+    'WHERE AcquisitionYear >= 1988 AND AcquisitionYear <= 2018 ' +
     'GROUP BY ParentCompany ' +
     'ORDER BY count(*) DESC ' +
     'LIMIT 7;';
   }else {
     query = 'SELECT ParentCompany AS "value", count(*) AS "count" ' +
     'FROM acquisitions ' +
-    'WHERE year >= 1988 AND year <= 2018 AND ParentCompany = \'' +
+    'WHERE AcquisitionYear >= 1988 AND AcquisitionYear <= 2018 AND ParentCompany = \'' +
     company +
     '\' GROUP BY ParentCompany ' +
     'ORDER BY count(*) DESC ' +
