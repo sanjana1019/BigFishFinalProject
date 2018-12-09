@@ -204,16 +204,40 @@ app.controller('query2_bscontroller', function ($scope,$http){
 
         childrenList = [];
         console.log("entered");
-        if('Google' === parentItem)
-        {
-            childrenList.push('Artificial Intelligence');
-            childrenList.push('Autonomous Driving');
-            childrenList.push('Search Engine');
-        }
-        else if ('Microsoft' === parentItem) {
-            childrenList.push('Autonomous Driving');
-            childrenList.push('Search Engine');
-        } 
+        childrenList.push('Machine Learning');
+        childrenList.push('Natural Language Processing');
+        childrenList.push('Data Mining');
+        childrenList.push('Computer Vision');
+        childrenList.push('Autonomous Driving');
+        childrenList.push('Search Engine');
+        childrenList.push('Speech Recognition');
+        childrenList.push('Operating System');
+        childrenList.push('Machine Translation');
+        childrenList.push('Predictive Modeling');
+        childrenList.push('Recommender System');
+        childrenList.push('Data Analysis');
+        childrenList.push('Big Data');
+        childrenList.push('Data Management');
+        childrenList.push('Cloud Computing');
+        childrenList.push('Grid Computing');
+        childrenList.push('Grid Computing');
+        childrenList.push('Parallel Computing');
+        childrenList.push('Deep Learning');
+        childrenList.push('Reinforcement Learning');
+        childrenList.push('Networked System');
+        childrenList.push('Linguistic');
+        childrenList.push('Robotic');
+
+        // if('Google' === parentItem)
+        // {
+        //     childrenList.push('Artificial Intelligence');
+        //     childrenList.push('Autonomous Driving');
+        //     childrenList.push('Search Engine');
+        // }
+        // else if ('Microsoft' === parentItem) {
+        //     childrenList.push('Autonomous Driving');
+        //     childrenList.push('Search Engine');
+        // } 
 
         $scope.childrenList = childrenList;
     };
@@ -222,6 +246,66 @@ app.controller('query2_bscontroller', function ($scope,$http){
         console.log(parentCompany);
         console.log(childCompany);
         var request = $http.get('/query2_bs/parent/'+parentCompany+'/child/'+childCompany);
+        request.success(function(data){
+            console.log('got response');
+            $scope.data = data;
+        });
+        request.error(function(data){
+            console.log('err');
+        });
+
+    };
+
+});
+
+
+app.controller('query4_bscontroller', function ($scope,$http){
+    childrenList = [];
+    console.log("entered");
+    childrenList.push('Machine Learning');
+    childrenList.push('Natural Language Processing');
+    childrenList.push('Data Mining');
+    childrenList.push('Virtual Reality');
+    childrenList.push('Computer Vision');
+    childrenList.push('Autonomous Driving');
+    childrenList.push('Image Processing');
+    childrenList.push('Search Engine');
+    childrenList.push('Speech Recognition');
+    childrenList.push('Operating System');
+    childrenList.push('Machine Translation');
+    childrenList.push('Predictive Modeling');
+    childrenList.push('Recommender System');
+    childrenList.push('Data Analysis');
+    childrenList.push('Big Data');
+    childrenList.push('Data Management');
+    childrenList.push('Cloud Computing');
+    childrenList.push('Grid Computing');
+    childrenList.push('Grid Computing');
+    childrenList.push('Parallel Computing');
+    childrenList.push('Deep Learning');
+    childrenList.push('Reinforcement Learning');
+    childrenList.push('Networked System');
+    childrenList.push('Linguistic');
+    childrenList.push('Robotic');
+    childrenList.push('Computer Architecture');
+    childrenList.push('Crowd Sourcing');
+    childrenList.push('Software Systems');
+    childrenList.push('Computational Linguistic');
+    childrenList.push('Embedded Systems');
+    childrenList.push('Mobile Communication');
+    childrenList.push('Information System');
+    childrenList.push('Cryptography');
+    childrenList.push('Computer Graphics');
+    childrenList.push('Business Intelligence');
+    childrenList.push('Automata');
+    childrenList.push('Animation');
+
+    $scope.childrenList = childrenList;
+
+    $scope.Submit = function(childCompany){
+        console.log('Hey HIIII');
+        console.log(childCompany);
+        var request = $http.get('/query4_bs/child/'+childCompany);
         request.success(function(data){
             console.log('got response');
             $scope.data = data;
